@@ -1,14 +1,25 @@
 {% extends "base.html" %}
+
+
 {% block title %}Task list{% endblock%}
 
+
 {% block content %}
-<h1>Task list</h1>
-<ul>
-{% for item in item_list %}
 
-<li>{{item.title}} | {{item.start_date}} to {{item.end_date}}</li>
+	<h1>Task list</h1>
 
-{% endfor %}
+	<table border='1'>
 
-</ul>
+		{% for item in item_list %}
+		<tr>
+			<td>{{item.title}}</td>
+			<td>{{item.start_date}}</td>
+			<td>{{item.end_date}}</td>
+		</tr>
+		{% endfor %}
+
+	</table>
+
+	<p>test</p>
+
 {% endblock %}
