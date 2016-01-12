@@ -15,11 +15,23 @@
 			<td>{{item.title}}</td>
 			<td>{{item.start_date}}</td>
 			<td>{{item.end_date}}</td>
+			
+			<td><input type="checkbox" id="completed_{{ item.id }}" {% if item.completed %}checked{% endif %} onclick="toggle_completed({{ item.id }})"></td>
+			
 		</tr>
 		{% endfor %}
 
 	</table>
+	
+<script>
 
-	<p>test</p>
+	function toggle_completed(id) {
+		$.post("{% url 'tasks:toggle_completed' %}", {id: id}, process_toggle_completed);
+	}
+	
+	function process_toggle_completed(data) {
+		console.log(data);
+	}
 
+</script>
 {% endblock %}
