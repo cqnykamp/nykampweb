@@ -8,15 +8,15 @@
 
 	<h1>Task list</h1>
 
-	<table border='1'>
+	<table border='1' style="background-color:#e5e5e5">
 
 		{% for item in item_list %}
-		<tr>
+		<tr {% if item.completed %}class="item_completed_true"{% endif %} id="item_{{ item.id }}">
 			<td>{{item.title}}</td>
 			<td>{{item.start_date}}</td>
 			<td>{{item.end_date}}</td>
 			
-			<td><input type="checkbox" id="completed_{{ item.id }}" {% if item.completed %}checked{% endif %} onclick="toggle_completed({{ item.id }})"></td>
+			<td><input type="checkbox" id="completed_{{ item.id }}" {% if item.completed %}checked{% endif %} onclick="toggle_completed({{ item.id }}, event)"></td>
 			
 		</tr>
 		{% endfor %}
@@ -25,12 +25,19 @@
 	
 <script>
 
-	function toggle_completed(id) {
+	function toggle_completed(id, e) {
+		e.preventDefault();
 		$.post("{% url 'tasks:toggle_completed' %}", {id: id}, process_toggle_completed);
 	}
 	
 	function process_toggle_completed(data) {
-		console.log(data);
+		var id = data["item_id"];
+		var completed = data["completed"];
+		
+		$("#item_"+ id).toggleClass("item_completed_true");
+		$("#completed_"+ id).prop("checked", completed);
+
+		
 	}
 
 </script>

@@ -1,3 +1,7 @@
 body {
 	background-color: #efefef;
 }
+
+.item_completed_true {
+	color: #909090;
+}
