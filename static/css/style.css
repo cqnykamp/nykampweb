@@ -1,7 +1,40 @@
 body {
-	background-color: #efefef;
+	background-color: #ebebff;
+}
+
+.content {
+	background-color: #f9f9f9;
+	padding: 10px;
+}
+
+.toolbar {
+	height: 50px;
+	background-color: #5e5eb0;
+	color: white;
+}
+
+.toolbar * {
+	display: inline;
+}
+
+.toolbar h1 {
+	padding-left: 10px;
 }
 
 .item_completed_true {
 	color: #909090;
+}
+
+.login_logout_button {
+	width: 100px;
+	height: 50px;
+	float: right;
+	background-color: #2bd32b;
+}
+
+.login_logout_button a {
+	margin-top: 10px;
+	display: block;
+	color: white;
+	text-align: center;
 }
