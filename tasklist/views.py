@@ -3,8 +3,11 @@ from django.views.generic import ListView, View
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
 
 from .models import Item
+
 
 
 class TaskIndexView (ListView):
@@ -12,8 +15,11 @@ class TaskIndexView (ListView):
 	template_name='tasklist/index.html'
 	
 	@method_decorator(ensure_csrf_cookie)
+	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super(TaskIndexView, self).dispatch(*args, **kwargs)
+
+
 
 
 class ToggleCompletedView (View):
