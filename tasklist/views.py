@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, View
+from django.views.generic import ListView, DetailView, View, UpdateView
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 from django.utils.decorators import method_decorator
@@ -18,8 +18,7 @@ class TaskIndexView (ListView):
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super(TaskIndexView, self).dispatch(*args, **kwargs)
-
-
+		
 
 
 class ToggleCompletedView (View):
@@ -40,3 +39,17 @@ class ToggleCompletedView (View):
 		item.save()
 		
 		return JsonResponse({'item_id': item_id, 'completed': item.completed})
+		
+
+class TaskDetailView (DetailView):
+	model = Item
+	template_name = "tasklist/detail.html"
+	pk_url_kwarg = "task_id"
+	
+
+class TaskEditView (UpdateView):
+	model = Item
+	fields = ['title', 'description', 'start_date', 'end_date', 'priority', 'completed']
+	template_name = "tasklist/edit_item.html"
+	pk_url_kwarg = "task_id"
+
